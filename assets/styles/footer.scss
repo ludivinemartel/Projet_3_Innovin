@@ -1,0 +1,68 @@
+.foot {
+    font-family: var(--font);
+    background-color: var(--couleur-claire);
+    margin-top: 6%;
+    padding: 2vh 3vh 1vh;
+    bottom: 0;
+}
+
+.vgFooterH5 {
+    color: var(--couleur-fonce);
+    font-size: 20px;
+    margin-bottom: 2vh;
+    text-align: center;
+}
+
+.vgFooterDivColumns {
+    display: flex;
+    justify-content: space-around;
+}
+
+.vgFooterColumn a {
+    text-decoration: none;
+    color: var(--couleur-fonce);
+}
+
+.vgFooterColumn li {
+    margin-bottom: 0.5vh;
+}
+
+.colornotice {
+    color: var(--couleur-fonce);
+}
+
+.contact {
+    margin-bottom: 5%;
+}
+
+.vgFooterCautions {
+    text-align: center;
+    color: var(--couleur-fonce);
+    font-size: small;
+    margin-top: 5vh;
+}
+
+.abus {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+@media (max-width: 450px) {
+
+    .vgFooterDivColumns {
+        flex-direction: column;
+
+    }
+
+    .vgFooterColumn {
+        margin-bottom: 2vh;
+    }
+
+    .vgFooterColumn li {
+        margin-bottom: 0;
+    }
+
+    .vgFooterCautions {
+        margin-top: 3vh;
+    }
+}

@@ -1,0 +1,573 @@
+.vgNavbarDegustation {
+    background-image: url(/assets/images/wave.svg);
+    background-size: cover;
+    height: 50vh;
+}
+
+label {
+    color: var(--couleur-claire);
+}
+
+.page {
+    margin: 0 10% 70px 10%;
+}
+
+.titre-fiche {
+    font-size: larger;
+    color: var(--couleur-tierce);
+    position: absolute;
+    right: 0;
+    top: 20px;
+    margin-right: 10%;
+}
+
+.h1-crud {
+    color: var(--couleur-fonce);
+    position: absolute;
+    right: 0;
+    top: 50px;
+    margin-right: 10%;
+}
+
+.ss-titre {
+    color: var(--couleur-claire);
+    border-bottom: solid 1px var(--couleur-claire);
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 0.5%;
+    max-width: 150px;
+    margin-top: 20px;
+}
+
+.form-title {
+    grid-column: 1/ span 3;
+    /* titre occupe les 2 colonnes */
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 4%;
+}
+
+.form-title.evaluation {
+    margin: 40px 0 40px 0;
+}
+
+.cardcontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr minmax(0, 1fr);
+    grid-gap: 10px;
+    margin: 5%;
+}
+
+.cardcontainer.full {
+    grid-template-columns: 1fr;
+}
+
+.form-column {
+    flex: 0 0 48%;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.horizontal-row,
+.range-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+.form-label {
+    color: var(--couleur-claire);
+    margin: 20px 0 20px 0;
+    font-weight: bold;
+}
+
+.form-label.middle {
+    text-align: center;
+}
+
+/* Oeil - Checkbox Couleur */
+
+.checkbox-container input[type="checkbox"],
+.checkbox-container input[type="radio"],
+.matiere-button input[type="radio"],
+.aroma input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    outline: none;
+    border: solid 1px var(--couleur-claire);
+}
+
+.checkbox-container input[type="checkbox"]:checked::before,
+.checkbox-container input[type="radio"]:checked::before,
+.matiere-button input[type="radio"]:checked::before,
+.aroma input[type="checkbox"]:checked::before {
+    content: "";
+    content: "\2713"; /* Code Unicode pour le symbole de coche */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+}
+
+
+.checkbox-container input[type="checkbox"]:checked::before,
+.checkbox-container input[type="radio"]:checked::before,
+.matiere-button input[type="radio"]:checked::before,
+.aroma input[type="checkbox"]:checked::before {
+    color:var(--couleur-claire);
+}
+
+.checkbox-container.couleurs-jaunes input[type="checkbox"]:checked::before,
+.checkbox-container.couleurs-jaunes input[type="radio"]:checked::before
+{
+    color: black;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    color: var(--couleur-claire);
+    margin-bottom: 20px;
+    margin-bottom: 20%;
+}
+
+.checkbox-container input:hover {
+    scale: 1.12;
+}
+
+/* Personnalisation des couleurs pour chaque checkbox */
+input#fiche_degustation_couleur_0 {
+    background-color: #9e0e40;
+    border: none;
+}
+
+input#fiche_degustation_couleur_1 {
+    background-color: #E70F30;
+    border: none;
+}
+
+input#fiche_degustation_couleur_2 {
+    background-color: #e0115f;
+    border: none;
+}
+
+input#fiche_degustation_couleur_3 {
+    background-color: #9e0e40;
+    border: none;
+}
+
+input#fiche_degustation_couleur_4 {
+    background-color: #6c344f;
+    border: none;
+}
+
+input#fiche_degustation_couleur_5 {
+    background-color: #6e0b14;
+    border: none;
+}
+
+input#fiche_degustation_couleur_6 {
+    background-color: #a24d3f;
+    border: none;
+}
+
+input#fiche_degustation_couleur_7 {
+    background-color: #E2DB8B;
+    border: none;
+}
+
+input#fiche_degustation_couleur_8 {
+    background-color: #E8DA51;
+    border: none;
+}
+
+input#fiche_degustation_couleur_9 {
+    background-color: #EDC851;
+    border: none;
+}
+
+input#fiche_degustation_couleur_10 {
+    background-color: #FED851;
+    border: none;
+}
+
+input#fiche_degustation_couleur_11 {
+    background-color: #D7AB2B;
+    border: none;
+}
+
+input#fiche_degustation_couleur_12 {
+    background-color: #D68F2A;
+    border: none;
+}
+
+input#fiche_degustation_couleur_13 {
+    background-color: #CD7921;
+    border: none;
+}
+
+/* Oeil - Curseur Limpidité */
+.custom-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background-color: var(--couleur-claire);
+    outline: none;
+    border-radius: 50px;
+    writing-mode: sideways-lr;
+    transform: rotate(-90deg);
+}
+
+.custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 30px;
+    background-color: var(--couleur-tierce);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.vertical-range {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+
+}
+
+
+.horizontal-range {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.horizontal-range input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50vw;
+    height: 10px;
+    background-color: var(--couleur-claire);
+    outline: none;
+    border-radius: 50px;
+    writing-mode: sideways-lr;
+    grid-row: 2
+}
+
+.horizontal-range input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 30px;
+    background-color: var(--couleur-tierce);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.horizontal-range output {
+    align-self: flex-end;
+}
+
+.horizontal-range label {
+    margin-left: -200px;
+}
+
+
+.labels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: -140px;
+    margin-left: 97px;
+}
+
+.label {
+    color: var(--couleur-claire);
+    padding: 25px;
+}
+
+output {
+    color: var(--couleur-claire);
+    margin-right: -140px;
+}
+
+/* Le nez - arome */
+select {
+    width: 130px;
+    height: 35px;
+    color: var(--couleur-claire);
+    background-color: var(--couleur-tierce);
+    border-radius: 40px;
+    border: none;
+    box-shadow: 2px 2px 4px #000000;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}
+
+select:hover {
+    background-color: #e0115f;
+    scale: 1.12;
+    cursor: pointer;
+}
+
+.arome {
+    color: var(--couleur-claire);
+    margin-top: 4%;
+    display: flex;
+    max-width: 15vw;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.aroma-container {
+    display: grid;
+    grid-template-columns: repeat(3, 186px);
+    grid-gap: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.aroma-flex {
+    display: flex;
+}
+
+.arome-label {
+    color: var(--couleur-claire);
+    font-weight: bold;
+    margin: 30px 0px 30px 0px;
+}
+
+.aroma {
+    padding: 20px;
+}
+
+.aroma-choices {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.aromainput {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.aroma-choices:last-child {
+    margin-bottom: 20px;
+}
+
+.cta {
+    margin-bottom: 10%;
+    padding: 10px 55px;
+    box-shadow: 2px 2px 4px #000000;
+}
+
+.cta-container {
+    margin-top: 20%;
+}
+
+.cta:hover {
+    scale: 1.12;
+}
+
+.cta.selected {
+    background-color: #e0115f;
+}
+
+li {
+    list-style: none;
+    color: var(--couleur-claire);
+    padding: 3%;
+}
+
+/* Emotion */
+
+.emotions-container {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    align-items: center;
+
+}
+
+.emotions-row {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: auto;
+    justify-content: center;
+    gap: 40px;
+
+}
+
+.emotion-label.emotion-title-label input[type="checkbox"] {
+    display: none;
+}
+
+.img-emotion {
+    width: 50px;
+    background-color: var(--couleur-tierce);
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px #000000;
+    margin-bottom: 20px;
+
+}
+
+.img-emotion:hover,
+.img-emotion:checked {
+    background-color: #e0115f;
+    scale: 1.12;
+}
+
+.img-emotion.active {
+    background-color: #e0115f;
+    scale: 1.12;
+}
+
+
+.emotion-cta {
+    display: none;
+}
+
+.emotion-custom-indicator {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.emotion-label-text {
+    text-align: center;
+    color: var(--couleur-claire);
+    margin-top: 5px;
+}
+
+.emotion-cta:checked+.img-emotion {
+    background-color: #e0115f;
+}
+
+.emotion-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.activefiche {
+    background-color: #e0115f;
+    scale: 1.12;
+}
+
+/* Bouton submit */
+
+.buttonFiche {
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: var(--couleur-tierce);
+    color: var(--couleur-claire);
+    border: none;
+    box-shadow: 2px 2px 4px #000000;
+    position: absolute;
+    right: 0;
+    margin-right: 15%;
+}
+
+.form-submit {
+    background-color: var(--couleur-fonce);
+    height: 20vh;
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.form-submit:hover {
+    scale: 1.2;
+}
+
+.matiere-structure-container {
+    display: grid;
+    grid-template-columns: repeat(2, 279px);
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px 0px 20px 0px;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .cardcontainer,
+    .aroma-container,
+    .emotions-container {
+        grid-template-columns: 1fr;
+    }
+
+    .emotions-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .img-emotion {
+        margin: 0;
+    }
+
+    .ss-titre {
+        margin-bottom: 10px;
+    }
+
+    .horizontal-range input[type=range] {
+        width: 50vw;
+    }
+
+    .h1-crud {
+        margin-top: 18%;
+        color: var(--couleur-claire);
+        top: 1.5em;
+    }
+
+    .titre-fiche {
+        margin-top: 0;
+    }
+}
+@media only screen and (max-width: 1180px) {
+
+.vgNavbarDegustation {
+    background-image: url(/assets/images/wave.svg);
+    background-size: cover;
+    height: 23vh;
+}
+}

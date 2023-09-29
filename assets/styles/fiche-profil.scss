@@ -1,0 +1,156 @@
+.titreFiche {
+    color: var(--couleur-claire);
+}
+
+.description {
+    color: var(--couleur-claire);
+}
+
+.container-lm{
+    display: flex;
+    padding: 0% 10% 0% 10%;
+}
+
+#pie-chart{
+    width: 20px; 
+    height: 20px;
+}
+
+.glass{
+    display: flex;
+    padding: 0% 10% 0% 10%;
+}
+
+.titre-arome{
+    color: var(--couleur-claire);
+    padding-left: 10%;
+    padding-bottom: 3%;
+    padding-top: 5%;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+#pie-chart{
+    padding-top: 5%;
+}
+
+.wineglass-shape {
+    background-size: cover;
+    background-position: center;
+    height: 7vh;
+    justify-self: end;
+    cursor: pointer;
+    position: relative;
+    animation: jumpAnimation 2s infinite;
+}
+
+@keyframes jumpAnimation {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-20px) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+
+    75% {
+        transform: translateY(-20px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+
+.wineglass-shape.expanded {
+    transform: scale(10);
+    transition: 0.3s ease-in-out
+}
+
+.animate.pop {
+    animation-duration: 0.5s;
+    animation-name: animate-pop;
+}
+
+.animate.pop2 {
+    animation-duration: 0.5s;
+    animation-name: animate-pop2;
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+
+@keyframes animate-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes animate-pop2 {
+    0% {
+        opacity: 0;
+        transform: scale(1.5, 1.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+}
+
+.animate.blur {
+    animation-duration: 4s;
+    animation-name: animate-blur;
+    padding:0% 10% 5% 10%;
+}
+
+
+@keyframes animate-blur {
+    0% {
+        opacity: 0;
+
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .img-profil {
+        width: 50vw;
+    }
+
+    .wineglass-shape {
+        gap: 40px;
+    }
+}
+
+.cta-p{
+    color: var(--couleur-claire);
+    background: var(--couleur-tierce);
+    text-align: center;
+    border-radius: 70px;
+    padding: 1% 6%;
+    text-decoration: none;
+    margin-left: 35% !important;
+    margin-top: 10%;
+    border: none;
+}
+
+.cta-p:hover {
+    background: #e0115f;
+    text-decoration: none;
+}
