@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} - Atelier {% endblock %}
+
+{% block body %}
+    <h1>Atelier index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Place</th>
+                <th>Horaire</th>
+                <th>Adresse</th>
+                <th>Date</th>
+                <th>Vin</th>
+                <th>Participants</th>
+                <th>Commentaire</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for atelier in ateliers %}
+            <tr>
+                <td>{{ atelier.id }}</td>
+                <td>{{ atelier.place }}</td>
+                <td>{{ atelier.date ? atelier.date|date('Y-m-d') : '' }}</td>
+                <td>{{ atelier.address}}</td>
+                <td>{{ atelier.horaire }}</td>
+                {% for eachvin in atelier.vin %}
+                <td>{{eachvin.nom}}</td>
+                {% endfor %}
+                {% for user in atelier.users %}
+                <td>{{ user.name}}</td>
+                {% endfor %}
+                <td>{{ atelier.commentaire }}</td>
+                <td>
+                    <a href="{{ path('app_atelier_show', {'id': atelier.id}) }}">show</a>
+                    <a href="{{ path('app_atelier_edit', {'id': atelier.id}) }}">edit</a>
+                </td>            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_atelier_new') }}">Create new</a>
+{% endblock %}
