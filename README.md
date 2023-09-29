@@ -35,3 +35,8 @@ PHPStan
 
 Captures d'écran
 https://user-images.githubusercontent.com/103316525/260001540-9bd21162-641e-420e-9734-a445b916710b.png
+https://user-images.githubusercontent.com/103316525/260001704-34005d68-cdff-45f1-b81d-08c9d393ebb2.png
+https://user-images.githubusercontent.com/103316525/260001744-ab69ead7-6c9b-4a1a-859c-395fa3707441.png
+https://user-images.githubusercontent.com/103316525/260002013-ef507d56-4fc6-4b9e-b28f-ef04c06ef5c7.png
+https://user-images.githubusercontent.com/103316525/260002175-4d861800-e0a1-44a8-95fe-76fd8f016159.png
+https://user-images.githubusercontent.com/103316525/260002207-95435e24-e72c-40a7-a88b-12c875c33104.png
