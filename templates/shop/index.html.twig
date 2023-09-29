@@ -1,0 +1,217 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} - Boutique {% endblock %}
+
+{% block stylesheets %} 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
+{{ parent() }} 
+{% endblock %}
+
+{% block body %}
+ <!--Message-->
+  {% for category, messages in app.flashes %}
+      {% for message in messages %}
+          <div class="w-50 container-sm text-white alert alert-{{ category }}">
+          <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+              {{ message }}
+          </div>
+      {% endfor %}
+  {% endfor %}
+
+<h1 class="titre">La Boutique</h1>
+
+{% if articles is empty %}
+<div class="carre-profil">
+  <h1 class="connexion">Temporairement indisponible</h1>
+</div>
+{% else %}
+{% set filteredArticles = articles|filter(article => article.star) %}
+  {% if filteredArticles is not empty %}
+  <div class="d-none d-sm-block">
+  <h2 class="sk-container text-center"><span class="sk-rubrique">Les stars du mois</span></h2>
+  <!--Carousel-->
+  <div id="carouselExampleCaptions" class="carousel slide  sk-container sk-carousel">
+    <div class="carousel-indicators mb-0">
+      {% for article in filteredArticles %}
+        <button clas="mt-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ loop.index }}"></button>
+      {% endfor %}
+    </div>
+    <div class="carousel-inner">
+      {% for article in filteredArticles %}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+          <div class="d-flex">
+            <div class="sk-caroussel-body">
+              <img class="d-block sk-caroussel-picture" src="{{ vich_uploader_asset(article) }}" alt="{{ article.nom }}">
+            </div>
+          <div class="d-flex mt-3 flex-column">
+            <div class="d-flex sk-note">
+              <div class="d-flex ms-2">
+                <p class="mb-0"><a href="{{ path('shop_note', {'slug': article.slug, 'note': 1}) }}" title= "1/5"><i class="bi bi-star sk-star"></i></a></p>
+                <p class="mb-0"><a href="{{ path('shop_note', {'slug': article.slug, 'note': 2}) }}" title= "2/5"><i class="bi bi-star sk-star"></i></a></p>
+                <p class="mb-0"><a href="{{ path('shop_note', {'slug': article.slug, 'note': 3}) }}" title= "3/5"><i class="bi bi-star sk-star"></i></a></p>
+                <p class="mb-0"><a href="{{ path('shop_note', {'slug': article.slug, 'note': 4}) }}" title= "4/5"><i class="bi bi-star sk-star"></i></a></p>
+                <p class="mb-0"><a href="{{ path('shop_note', {'slug': article.slug, 'note': 5}) }}" title= "5/5"><i class="bi bi-star sk-star"></i></a></p>
+              </div>
+              {% for note in notes %}
+              {% if note.vin_id == article.id and note.averageNote > 0 %}
+              <p class="flex-grow-1 ms-5"><em>Note {{note.averageNote|round(1)}}/5</em></p>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="sk-note">
+            <div class="col-7">
+              <h5 class="mt-3 text-break text-uppercase"><strong>{{article.nom}}</strong></h5>
+            </div>
+            <div class="col-7 sk-truncate">
+              <h5 class="mt-3 text-break">
+                <span data-bs-toggle="tooltip" data-bs-placement="top" title="{{ article.description }}" style="word-wrap: break-word; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; text-overflow: ellipsis;">
+                      {{ article.description }}
+                </span>
+             </h5>
+            </div>
+            <p class="sk-card-title text-break">{{article.region}} - {{article.millesime}}</p>
+            <p class="sk-card-title text-break fw-medium">{{article.couleur}}&emsp;&emsp;{{article.prix}} € </p>
+            <div class="row">
+              {% for arome in article.arome %}
+              <div class="col-3">
+                <div>
+                  <span class="badge text-bg-sk-badges opacity-50">{{ arome }}</span>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          <div class=" mt-5">
+            <div class="d-flex">
+             <button class="sk-button-caroussel" onclick="addToCart('{{ article.id }}')">Ajouter au panier</button>
+             </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+    <button class="carousel-control-prev sk-button-slide" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span aria-hidden="true"><i class="bi bi-arrow-left-square fs-2"></i></span>
+      <span class="visually-hidden">Précédent</span>
+    </button>
+    <button class="carousel-control-next sk-button-slide" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span aria-hidden="true"><i class="bi bi-arrow-right-square fs-2"></i></span>
+      <span class="visually-hidden">Suivant</span>
+    </button>
+</div>
+
+<div class="sk-divider"></div>
+</div>
+{% endif %}
+
+
+<div class="card sk-container sk-cardbody">
+  <div class="card-header w-100">Filtres de recherche</div>
+  <div class="card-body w-100">
+  {{ form_start(form) }}
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        {{ form_row(form.search, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="mb-3 mb-md-0">
+        {{ form_row(form.date, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="mb-3 mb-md-0">
+        {{ form_row(form.couleur, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="text-center text-md-start">
+        <button class="sk-button-search">Rechercher</button>
+      </div>
+    </div>
+  {{ form_end(form) }}
+  </div>
+</div>
+
+{% if app.request.method == 'POST' %}
+<div class="sk-return mt-5 text-center">
+  <a class="sk-return-button" href="{{ path ('shop_index')}}">Retour boutique</a>
+</div>
+{% endif %}
+ 
+<!--Card-->
+<div class="container">
+<div class="row row-cols-sm-2 justify-content-sm-start mt-5">
+  {% for article in articles %}
+  <div class="col-sm-4 mb-5">
+    <div class="card h-100 sk-cardbody" style="width: 22rem;">
+      <div class="card-header d-flex justify-content-between w-100 mt-auto">
+         <div class="d-flex">
+          <p class="mb-0"><a class="note" href="{{ path('shop_note', {slug: article.slug, 'note': 1}) }}" title= "1/5"><i class="bi bi-star sk-star"></i></a></p>
+          <p class="mb-0"><a class="note" href="{{ path('shop_note', {slug: article.slug, 'note': 2}) }}" title= "2/5"><i class="bi bi-star sk-star"></i></a></p>
+          <p class="mb-0"><a class="note" href="{{ path('shop_note', {slug: article.slug, 'note': 3}) }}" title= "3/5"><i class="bi bi-star sk-star"></i></a></p>
+          <p class="mb-0"><a class="note" href="{{ path('shop_note', {slug: article.slug, 'note': 4}) }}" title= "4/5"><i class="bi bi-star sk-star"></i></a></p>
+          <p class="mb-0"><a class="note" href="{{ path('shop_note', {slug: article.slug, 'note': 5}) }}" title= "5/5"><i class="bi bi-star sk-star"></i></a></p>
+         </div>
+         {% for note in notes %}
+          {% if note.vin_id == article.id and note.averageNote > 0 %}
+        <p class=" small"><em>Note {{note.averageNote|round(1)}}/5</em></p>
+          {% endif %}
+        {% endfor %}
+         <p class="mb-0"><a class="watchlist" href="{{  path('shop_watchlist', {slug: article.slug})}}">
+         <i class="bi fs-4 sk-star {{ app.user and app.user.isInWatchlist(article) ? 'bi-heart-fill' : 'bi-heart' }}"></i></a></p> 
+      </div>
+      <div class="d-flex h-100">
+        <img class="w-50 align-self-center sk-picture-shop" src="{{ vich_uploader_asset(article) }}" alt="{{ article.nom }}">
+        <div class="card-body">
+          <h5 class="card-title sk-card-title mt-3 text-break text-uppercase"><small><strong>{{article.nom}}</strong></small></h5>
+          <p class="card-text sk-card-title text-break">{{article.region}} - {{article.millesime}}</p>
+          <p class="card-text sk-card-title text-break fw-medium">{{article.couleur}}</p>
+          <ul class="list-group list-group-flush">
+          <div class="row">
+          {% for arome in article.arome %}
+          <div class="col-sm-5">
+            <div>
+              <span class="badge text-bg-sk-badges opacity-50">{{ arome }}</span>
+            </div>
+          </div>
+          {% endfor %} 
+          </div>
+          <p class="card-text sk-card-title text-break fw-medium mt-3">{{article.prix}} €</p> 
+          </ul>
+        </div>
+      </div>
+      <div class="card-footer w-100 mt-auto">
+        <div class="d-flex justify-content-between">
+          <button class="sk-button" onclick="addToCart('{{ article.id }}')">Ajouter au panier</button>
+          <input class="quantity_{{ article.id }} w-25 form-control" type="number" name="quantity" min="1" value="1" onchange="updateQuantity('{{ article.id }}', this.value)">
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+
+
+
+<script>
+function addToCart(id) {
+  var quantityInput = document.querySelector('.quantity_' + id);
+  var quantity = parseInt(quantityInput.value);
+  var url = "{{ path('shop_add', { 'id': 'VIN_ID', 'quantity': 'QUANTITY' }) }}";
+  url = url.replace('VIN_ID', id);
+  url = url.replace('QUANTITY', quantity);
+  window.location.href = url;
+}
+
+
+function updateQuantity(id, value) {
+  var quantityInput = document.querySelector('.quantity_' + id);
+  quantityInput.value = value;
+}
+</script>
+
+{% endif %}
+
+{% block javascripts %} {{ parent()}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% endblock %}
